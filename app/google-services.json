@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1015849911539",
+    "firebase_url": "https://lifeisrpg-da4af.firebaseio.com",
+    "project_id": "lifeisrpg-da4af",
+    "storage_bucket": "lifeisrpg-da4af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015849911539:android:43d7fdba00169c79",
+        "android_client_info": {
+          "package_name": "com.example.aldres.lifeisrpg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015849911539-ub4gg617lbgno890cigdo5t1ai8fp0r3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aldres.lifeisrpg",
+            "certificate_hash": "7baafed151f9df4ff0ed3f9294583d3033e320cf"
+          }
+        },
+        {
+          "client_id": "1015849911539-idvt4pspg9blm3lb3kib3ocaphsn6upf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2QcVeSgfCtbRvZVq0ZKFWTVgD6sL6ecQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015849911539-idvt4pspg9blm3lb3kib3ocaphsn6upf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
