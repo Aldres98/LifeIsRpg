@@ -15,14 +15,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
     EditText emailField;
     EditText passwordField;
+    EditText usernameField;
     Button signupButton;
-    String emailText;
-    String passwordText;
+    User user;
     private FirebaseAuth mAuth;
 
     @Override
@@ -31,6 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         emailField = findViewById(R.id.email);
+        usernameField = findViewById(R.id.name);
         passwordField = findViewById(R.id.password);
         signupButton = findViewById(R.id.btnRegister);
 
@@ -51,6 +55,9 @@ public class SignUpActivity extends AppCompatActivity {
     public void signupUser(){
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
+        String userName = usernameField.getText().toString().trim();
+
+        user = new User(email, userName, "M");
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Enter your email", Toast.LENGTH_SHORT).show();
@@ -67,6 +74,10 @@ public class SignUpActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d("Auth: ", "createUserWithEmail:success");
                             Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+//                            FirebaseUser user = mAuth.getCurrentUser();
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+                            ref.child("userData");
+                            ref.push().setValue(user);
                             startActivity(intent);
                         } else {
                             Log.w("Auth:", "createUserWithEmail:failure", task.getException());
