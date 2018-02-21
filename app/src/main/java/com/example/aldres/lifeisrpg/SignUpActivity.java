@@ -25,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText passwordField;
     EditText usernameField;
     Button signupButton;
-    User user;
+    User userData;
     private FirebaseAuth mAuth;
 
     @Override
@@ -57,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
         String password = passwordField.getText().toString().trim();
         String userName = usernameField.getText().toString().trim();
 
-        user = new User(email, userName, "M");
+        userData = new User(email, userName, "M", 0);
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Enter your email", Toast.LENGTH_SHORT).show();
@@ -73,11 +73,13 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("Auth: ", "createUserWithEmail:success");
-                            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-//                            FirebaseUser user = mAuth.getCurrentUser();
-                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-                            ref.child("userData");
-                            ref.push().setValue(user);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference ref = database.getReference().child("users").child(mAuth.getCurrentUser().getUid());
+                            ref.child("email").setValue(userData.getEmail());
+                            ref.child("username").setValue(userData.getUsername());
+                            ref.child("gender").setValue(userData.getGender());
+                            ref.child("exp").setValue(userData.getExp());
                             startActivity(intent);
                         } else {
                             Log.w("Auth:", "createUserWithEmail:failure", task.getException());

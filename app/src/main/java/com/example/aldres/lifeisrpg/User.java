@@ -9,16 +9,33 @@ public class User {
     private String email;
     private String username;
     private String gender;
+    private int exp;
 
-    public User(String email, String username, String gender) {
+    public User(String email, String username, String gender, int exp) {
         this.email = email;
         this.username = username;
         this.gender = gender;
+        this.exp = exp;
     }
 
     public User() {
     }
 
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public void addExp(int amount){
+        exp += amount;
+    }
+
+    public void removeExp(int amount) {
+        exp -= amount;
+    }
     public String getEmail() {
         return email;
     }
