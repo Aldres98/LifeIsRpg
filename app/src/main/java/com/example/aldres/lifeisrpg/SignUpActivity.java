@@ -25,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText passwordField;
     EditText usernameField;
     Button signupButton;
+    Button linkToLoginScreen;
     User userData;
     private FirebaseAuth mAuth;
 
@@ -35,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         emailField = findViewById(R.id.email);
         usernameField = findViewById(R.id.name);
+        linkToLoginScreen = findViewById(R.id.btnLinkToLoginScreen);
         passwordField = findViewById(R.id.password);
         signupButton = findViewById(R.id.btnRegister);
 
@@ -48,8 +50,13 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-
-
+        linkToLoginScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void signupUser(){

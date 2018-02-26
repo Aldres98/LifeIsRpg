@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
     private Button signOutBtn;
-    private Button plusExp;
+    private Button goToTasks;
     private Button minusExp;
     String userId;
     private FirebaseAuth mAuth;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         signOutBtn = findViewById(R.id.signOutBtn);
-        plusExp = findViewById(R.id.plusExp);
+        goToTasks = findViewById(R.id.goToTasks);
         minusExp = findViewById(R.id.minusExp);
 
         signOutBtn.setOnClickListener(new View.OnClickListener() {
@@ -50,10 +50,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        plusExp.setOnClickListener(new View.OnClickListener() {
+        goToTasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), TasksActivity.class);
+                startActivity(intent);
             }
         });
     }
