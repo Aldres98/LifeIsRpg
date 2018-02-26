@@ -68,7 +68,7 @@ public class SignInActivity extends AppCompatActivity {
         String password = inputPassword.getText().toString().trim();
 
         if (email.equals("") || password.equals("")) {
-            Toast.makeText(this, "Enter your email", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Enter your email and password", Toast.LENGTH_SHORT).show();
         } else {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
