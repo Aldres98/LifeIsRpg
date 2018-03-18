@@ -29,7 +29,7 @@
 
         <TextView
             android:id="@+id/exp_left"
-            android:text="100/600"
+            android:text="100exp"
             android:layout_marginStart="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,26 +38,15 @@
             android:layout_below="@+id/taskTitle"
             />
 
-        <ProgressBar
-            android:id="@+id/progressBar2"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="200dp"
-            android:layout_marginStart="32dp"
-            android:progress="40"
-            android:layout_toRightOf="@id/task_icon"
-            android:layout_centerInParent="true"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/exp_left"
-            android:layout_centerVertical="true" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_below="@id/exp_left"
+            android:layout_alignParentEnd="true"
             android:id="@+id/task_description"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at massa lobortis"
-            android:layout_below="@id/progressBar2"
-            android:layout_alignEnd="@id/progressBar2"
             android:layout_toRightOf="@id/task_icon"
             />
 

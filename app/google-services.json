@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "1015849911539-l5cf34v1bvse776avp3f5majq0djsc99.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.aldres.lifeisrpg",
-            "certificate_hash": "eb4d5470734eb17ef1675e6a8d6795446953f217"
-          }
-        },
-        {
           "client_id": "1015849911539-ub4gg617lbgno890cigdo5t1ai8fp0r3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

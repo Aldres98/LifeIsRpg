@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
     private Button signOutBtn;
-    private Button goToTasks;
+    private Button plusExp;
     private Button minusExp;
     String userId;
     private FirebaseAuth mAuth;
@@ -33,14 +33,21 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        userId = user.getUid();
-        ref = mDatabase.getReference().child("users").child(userId);
-        System.out.println(ref.getKey());
+        if (user == null) {
+            mAuth.signOut();
+            Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+            startActivity(intent);
+        }
+        else {
+            userId = user.getUid();
+            ref = mDatabase.getReference().child("users").child(userId);
+            System.out.println(ref.getKey());
+        }
 
 
 
         signOutBtn = findViewById(R.id.signOutBtn);
-        goToTasks = findViewById(R.id.goToTasks);
+        plusExp = findViewById(R.id.goToTasks);
         minusExp = findViewById(R.id.minusExp);
 
         signOutBtn.setOnClickListener(new View.OnClickListener() {
@@ -50,11 +57,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        goToTasks.setOnClickListener(new View.OnClickListener() {
+        plusExp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TasksActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        minusExp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeExp(100);
             }
         });
     }
@@ -81,19 +95,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+    private void showInf(){
+        DBtools mDBtools = new DBtools();
+        User user1 = mDBtools.getUserData();
+        System.out.println(user1.getExp());
     }
 
     private void changeExp(final int amount){

@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         String password = passwordField.getText().toString().trim();
         String userName = usernameField.getText().toString().trim();
 
-        userData = new User(email, userName, "M", 0);
+        userData = new User(email, userName, "M", 0, 1);
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Enter your email", Toast.LENGTH_SHORT).show();
@@ -86,6 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 ref.child("username").setValue(userData.getUsername());
                                 ref.child("gender").setValue(userData.getGender());
                                 ref.child("exp").setValue(userData.getExp());
+                                ref.child("level").setValue(userData.getLevel());
                                 startActivity(intent);
                             } else {
                                 Log.w("Auth:", "createUserWithEmail:failure", task.getException());

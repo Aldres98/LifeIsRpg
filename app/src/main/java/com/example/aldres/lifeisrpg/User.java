@@ -10,19 +10,33 @@ public class User {
     private String username;
     private String gender;
     private int exp;
+    private int level;
 
-    public User(String email, String username, String gender, int exp) {
+    public User(String email, String username, String gender, int exp, int level) {
         this.email = email;
         this.username = username;
         this.gender = gender;
         this.exp = exp;
+        this.level = level;
     }
 
     public User() {
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public int getExp() {
         return exp;
+    }
+
+    public void addLevel(){
+        level += 1;
     }
 
     public void setExp(int exp) {
