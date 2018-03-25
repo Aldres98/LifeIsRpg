@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_icon"
+            android:src="@drawable/ic_launcher_background"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/task_icon"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:text="Lorem ipsum dolor"
+            android:id="@+id/task_title" />
+
+        <TextView
+            android:id="@+id/exp_cost"
+            android:text="100exp"
+            android:layout_marginStart="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/task_icon"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/task_title"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_below="@id/exp_cost"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/task_description"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at massa lobortis"
+            android:layout_toRightOf="@id/task_icon"
+            />
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+

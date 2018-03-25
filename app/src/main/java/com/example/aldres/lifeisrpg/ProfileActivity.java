@@ -25,12 +25,12 @@ public class ProfileActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.levelBar);
         expLeft = findViewById(R.id.exp_left);
         currentLevel = findViewById(R.id.current_level);
-        goToTasks = findViewById(R.id.goToTasks);
+        goToTasks = findViewById(R.id.go_to_tasks);
 
         goToTasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TasksActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddTasksActivity.class);
                 startActivity(intent);
             }
         });

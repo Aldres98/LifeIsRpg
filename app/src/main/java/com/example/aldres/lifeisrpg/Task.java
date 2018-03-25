@@ -26,6 +26,12 @@ public class Task {
     public Task() {
     }
 
+    public Task(String title, String description, int expCost) {
+        this.title = title;
+        this.description = description;
+        this.expCost = expCost;
+    }
+
     public String getTitle() {
         return title;
     }
