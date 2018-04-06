@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
@@ -19,6 +20,7 @@ public class AddTasksActivity extends AppCompatActivity {
     private EditText taskTitle, taskDescription, expCost;
     private Button addTask;
     DatabaseReference ref;
+    DBtools tools;
 
 
     @Override
@@ -29,8 +31,7 @@ public class AddTasksActivity extends AppCompatActivity {
         taskDescription = findViewById(R.id.task_description);
         expCost = findViewById(R.id.exp_cost);
         addTask = findViewById(R.id.add_task);
-        DBtools tools = new DBtools();
-        ref = tools.initDb();
+        tools = new DBtools();
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,20 +43,14 @@ public class AddTasksActivity extends AppCompatActivity {
     }
 
     public void addTask(final Task task) {
-
-
-       ref.child("tasks").child("taskId");
+        ref = tools.initDb().child("tasks");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() == null){
-                    dataSnapshot.getRef().setValue(1);
-                }
-                dataSnapshot.getRef().setValue(1);
-                ref.child("taskTitle").setValue(task.getTitle());
-                ref.child("taskDescription").setValue(task.getDescription());
-                ref.child("taskExpCost").setValue(task.getExpCost());
-
+                    ref = ref.push();
+                    ref.child("taskTitle").setValue(task.getTitle());
+                    ref.child("taskDescription").setValue(task.getDescription());
+                    ref.child("taskExpCost").setValue(task.getExpCost());
             }
 
             @Override
