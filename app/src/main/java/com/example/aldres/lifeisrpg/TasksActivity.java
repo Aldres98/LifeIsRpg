@@ -20,9 +20,6 @@ public class TasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tasks);
         recyclerView = findViewById(R.id.recycler_view);
         List<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("aaa", "bb", 101));
-        tasks.add(new Task("aab", "bc", 102));
-        tasks.add(new Task("aac", "bd", 103));
 
         TasksAdapter recyclerViewAdapter = new TasksAdapter(tasks);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TasksActivity.this);
