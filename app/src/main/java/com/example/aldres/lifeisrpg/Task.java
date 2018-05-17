@@ -33,6 +33,12 @@ public class Task {
         this.startedAt = startedAt;
     }
 
+    public Task(String title, String description, int expCost) {
+        this.title = title;
+        this.description = description;
+        this.expCost = expCost;
+    }
+
     public String getTitle() {
         return title;
     }
