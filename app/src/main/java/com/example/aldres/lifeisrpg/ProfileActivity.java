@@ -30,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
         goToTasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddTasksActivity.class);
+                Intent intent = new Intent(getApplicationContext(), TasksActivity.class);
                 startActivity(intent);
             }
         });

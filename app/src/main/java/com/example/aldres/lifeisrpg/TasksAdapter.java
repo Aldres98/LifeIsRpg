@@ -31,13 +31,13 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
         Task task = tasksList.get(position);
         holder.taskTitle.setText(task.getTitle());
         holder.taskDescription.setText(task.getDescription());
-        holder.expCost.setText(task.getExpCost());
+        holder.expCost.setText(Integer.toString(task.getExpCost()));
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return tasksList.size();
     }
 
 
