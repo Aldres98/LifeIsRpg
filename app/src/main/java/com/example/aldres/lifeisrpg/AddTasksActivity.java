@@ -5,15 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Date;
 
 public class AddTasksActivity extends AppCompatActivity {
 
@@ -35,7 +33,8 @@ public class AddTasksActivity extends AppCompatActivity {
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Task task = new Task(taskTitle.getText().toString(), taskDescription.getText().toString(), Integer.parseInt(expCost.getText().toString()));
+                DateTools dateTools = new DateTools();
+                Task task = new Task(taskTitle.getText().toString(), taskDescription.getText().toString(), Integer.parseInt(expCost.getText().toString()), dateTools.getCurrentTimestamp());
                 addTask(task);
             }
         });
@@ -51,11 +50,12 @@ public class AddTasksActivity extends AppCompatActivity {
                     ref.child("taskTitle").setValue(task.getTitle());
                     ref.child("taskDescription").setValue(task.getDescription());
                     ref.child("taskExpCost").setValue(task.getExpCost());
+                    ref.child("startedAt").setValue(task.getStartedAt());
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), "Error, while creating task: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

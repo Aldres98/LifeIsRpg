@@ -10,11 +10,11 @@ public class Task {
     private String title;
     private String description;
     private int expCost;
-    private Date startedAt;
-    private Date timeToComplete;
-    private Date finishedAt;
+    private long startedAt;
+    private long timeToComplete;
+    private long finishedAt;
 
-    public Task(String title, String description, int expCost, Date startedAt, Date timeToComplete, Date finishedAt) {
+    public Task(String title, String description, int expCost, long startedAt, long timeToComplete, long finishedAt) {
         this.title = title;
         this.description = description;
         this.expCost = expCost;
@@ -26,10 +26,11 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title, String description, int expCost) {
+    public Task(String title, String description, int expCost, long startedAt) {
         this.title = title;
         this.description = description;
         this.expCost = expCost;
+        this.startedAt = startedAt;
     }
 
     public String getTitle() {
@@ -56,27 +57,27 @@ public class Task {
         this.expCost = expCost;
     }
 
-    public Date getStartedAt() {
+    public long getStartedAt() {
         return startedAt;
     }
 
-    public void setStartedAt(Date startedAt) {
+    public void setStartedAt(long startedAt) {
         this.startedAt = startedAt;
     }
 
-    public Date getTimeToComplete() {
+    public long getTimeToComplete() {
         return timeToComplete;
     }
 
-    public void setTimeToComplete(Date timeToComplete) {
+    public void setTimeToComplete(long timeToComplete) {
         this.timeToComplete = timeToComplete;
     }
 
-    public Date getFinishedAt() {
+    public long getFinishedAt() {
         return finishedAt;
     }
 
-    public void setFinishedAt(Date finishedAt) {
+    public void setFinishedAt(long finishedAt) {
         this.finishedAt = finishedAt;
     }
 }
