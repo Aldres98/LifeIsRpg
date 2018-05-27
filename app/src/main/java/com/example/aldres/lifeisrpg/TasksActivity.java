@@ -6,6 +6,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +24,9 @@ public class TasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tasks);
         recyclerView = findViewById(R.id.recycler_view);
         tasks = new ArrayList<>();
-        tasks.add(0,new Task("aaa", "bb", 101));
-        tasks.add(1,new Task("aab", "bc", 102));
-        tasks.add(2,new Task("aac", "bd", 103));
+        tasks.add(0, new Task("aaa", "bb", 101));
+        tasks.add(1, new Task("aab", "bc", 102));
+        tasks.add(2, new Task("aac", "bd", 103));
 
         TasksAdapter recyclerViewAdapter = new TasksAdapter(tasks);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TasksActivity.this);
@@ -30,7 +34,20 @@ public class TasksActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(recyclerViewAdapter);
 
+    }
 
+    private void uploadTasks() {
+        DBtools tools = new DBtools();
+        tools.initDb().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
