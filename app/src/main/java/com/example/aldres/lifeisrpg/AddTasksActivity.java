@@ -51,6 +51,7 @@ public class AddTasksActivity extends AppCompatActivity {
                     ref.child("taskDescription").setValue(task.getDescription());
                     ref.child("taskExpCost").setValue(task.getExpCost());
                     ref.child("startedAt").setValue(task.getStartedAt());
+                    ref.child("timeToComplete").setValue(1);
             }
 
             @Override

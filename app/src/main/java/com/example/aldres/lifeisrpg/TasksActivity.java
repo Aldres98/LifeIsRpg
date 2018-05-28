@@ -1,10 +1,13 @@
 package com.example.aldres.lifeisrpg;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,11 +20,21 @@ public class TasksActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     List<Task> tasks;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
+        fab = findViewById(R.id.add_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), AddTasksActivity.class);
+                startActivity(intent);
+            }
+        });
+
         recyclerView = findViewById(R.id.recycler_view);
         tasks = new ArrayList<>();
         tasks.add(0, new Task("aaa", "bb", 101));
@@ -36,9 +49,9 @@ public class TasksActivity extends AppCompatActivity {
 
     }
 
-    private void uploadTasks() {
+    private void loadTasks() {
         DBtools tools = new DBtools();
-        tools.initDb().addValueEventListener(new ValueEventListener() {
+        tools.initDb().child("tasks").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
