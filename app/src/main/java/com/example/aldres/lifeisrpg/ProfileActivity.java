@@ -46,14 +46,14 @@ public class ProfileActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 int level = user.getLevel();
                 int exp = user.getExp();
-                currentLevel.setText("LEVEL " + level);
+                currentLevel.setText(new StringBuilder().append("LEVEL ").append(level).toString());
 
                 if (isReadyToLevelUp(exp, level)) {
                     user.addLevel();
                     user.setExp(exp - 1000*level);
                     tools.initDb().setValue(user);
                 }
-                expLeft.setText(user.getExp() + "/" + 1000*user.getLevel());
+                expLeft.setText(new StringBuilder().append(user.getExp()).append("/").append(1000 * user.getLevel()).toString());
                 progressBar.setMax(1000*user.getLevel());
                 progressBar.setProgress(user.getExp());
 

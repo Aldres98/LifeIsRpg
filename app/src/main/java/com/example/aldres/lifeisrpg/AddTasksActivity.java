@@ -47,9 +47,9 @@ public class AddTasksActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                     ref = ref.push();
-                    ref.child("taskTitle").setValue(task.getTitle());
-                    ref.child("taskDescription").setValue(task.getDescription());
-                    ref.child("taskExpCost").setValue(task.getExpCost());
+                    ref.child("title").setValue(task.getTitle());
+                    ref.child("description").setValue(task.getDescription());
+                    ref.child("expCost").setValue(task.getExpCost());
                     ref.child("startedAt").setValue(task.getStartedAt());
                     ref.child("timeToComplete").setValue(1);
             }

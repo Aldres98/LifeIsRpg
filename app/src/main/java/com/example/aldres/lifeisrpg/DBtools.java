@@ -33,22 +33,4 @@ public class DBtools {
         ref = mDb.getReference().child("users").child(uid);
         return ref;
     }
-
-    public User getUserData(){
-        initDb();
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userData = dataSnapshot.getValue(User.class);
-                Log.w("UserData",userData.getExp() + userData.getUsername() + userData.getGender());
-            }
-
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-        return userData;
-    }
-}
+ }

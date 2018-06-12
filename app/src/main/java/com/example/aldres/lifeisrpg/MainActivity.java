@@ -95,12 +95,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void showInf(){
-        DBtools mDBtools = new DBtools();
-        User user1 = mDBtools.getUserData();
-        System.out.println(user1.getExp());
-    }
-
     private void changeExp(final int amount){
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

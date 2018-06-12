@@ -21,6 +21,7 @@ public class TasksActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Task> tasks;
     FloatingActionButton fab;
+    TasksAdapter recyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,9 @@ public class TasksActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         tasks = new ArrayList<>();
-        tasks.add(0, new Task("aaa", "bb", 101));
-        tasks.add(1, new Task("aab", "bc", 102));
-        tasks.add(2, new Task("aac", "bd", 103));
+        loadTasks();
 
-        TasksAdapter recyclerViewAdapter = new TasksAdapter(tasks);
+        recyclerViewAdapter = new TasksAdapter(tasks);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TasksActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -54,7 +53,12 @@ public class TasksActivity extends AppCompatActivity {
         tools.initDb().child("tasks").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                tasks.clear();
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    Task task = dsp.getValue(Task.class);
+                    tasks.add(task);
+                    recyclerViewAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
