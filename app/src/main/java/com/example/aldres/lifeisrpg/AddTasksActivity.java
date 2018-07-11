@@ -1,5 +1,7 @@
 package com.example.aldres.lifeisrpg;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,5 +61,9 @@ public class AddTasksActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error, while creating task: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public static final Intent newIntent(Context context){
+        return new Intent(context, AddTasksActivity.class);
     }
 }

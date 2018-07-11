@@ -1,42 +1,56 @@
 package com.example.aldres.lifeisrpg;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+/**
+ * Created by Aldres on 21.06.2018.
+ */
+
+public class ProfileFragment extends Fragment {
+
+    @BindView(R.id.user_avatar)
+    ImageView avatarView;
+    @BindView(R.id.exp_left)
+    TextView expLeft;
+    @BindView(R.id.levelBar)
+    ProgressBar levelBar;
+    @BindView(R.id.current_level)
+    TextView currentLevel;
+    @BindView(R.id.profile_username)
+    TextView username;
+
     private DBtools tools;
-    private ProgressBar progressBar;
-    private TextView expLeft, currentLevel;
-    private Button goToTasks;
+
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        ButterKnife.bind(this, view);
+        tools = new DBtools();
+        return view;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        progressBar = findViewById(R.id.levelBar);
-        expLeft = findViewById(R.id.exp_left);
-        currentLevel = findViewById(R.id.current_level);
-        goToTasks = findViewById(R.id.go_to_tasks);
-
-        goToTasks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TasksActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        tools = new DBtools();
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setProgressBar();
     }
 
@@ -55,8 +69,8 @@ public class ProfileActivity extends AppCompatActivity {
                     tools.initDb().setValue(user);
                 }
                 expLeft.setText(new StringBuilder().append(user.getExp()).append("/").append(1000 * user.getLevel()).toString());
-                progressBar.setMax(1000*user.getLevel());
-                progressBar.setProgress(user.getExp());
+                levelBar.setMax(1000*user.getLevel());
+                levelBar.setProgress(user.getExp());
 
             }
 
@@ -67,12 +81,9 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    public static final Intent newIntent (Context context){
-        return new Intent(context, ProfileActivity.class);
-    }
-
-
     private boolean isReadyToLevelUp(int exp, int level){
         return exp >= 1000 * level;
     }
+
+
 }

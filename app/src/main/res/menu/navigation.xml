@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_account_box_white_24dp"
+        android:title="@string/profile_title"
+        />
+
+    <item
+        android:id="@+id/navigation_tasks"
+        android:icon="@drawable/ic_note_white_24dp"
+        android:title="@string/tasks_hint"
+        />
+
+    <item
+        android:id="@+id/navigation_messages"
+        android:icon="@drawable/ic_message_white_24dp"
+        android:title="@string/messages_hint"
+        />
+
+</menu>

@@ -1,5 +1,6 @@
 package com.example.aldres.lifeisrpg;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -83,6 +84,10 @@ public class SignInActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    public static final Intent newIntent (Context context){
+        return new Intent(context, SignInActivity.class);
     }
 
 }

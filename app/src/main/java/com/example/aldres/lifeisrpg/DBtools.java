@@ -21,7 +21,6 @@ public class DBtools {
     private FirebaseDatabase mDb;
     private DatabaseReference ref;
     private String uid;
-    private User userData;
 
     public DatabaseReference initDb(){
         mAuth = FirebaseAuth.getInstance();

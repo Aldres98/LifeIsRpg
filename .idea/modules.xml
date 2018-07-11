@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/LifeIsRpg.iml" filepath="$PROJECT_DIR$/.idea/LifeIsRpg.iml" />
-      <module fileurl="file://C:\Users\Aldres\Downloads\LifeIsRpg\.idea\LifeIsRpg.iml" filepath="C:\Users\Aldres\Downloads\LifeIsRpg\.idea\LifeIsRpg.iml" />
-      <module fileurl="file://C:\Users\Aldres\Desktop\LifeIsRpg\LifeIsRpg.iml" filepath="C:\Users\Aldres\Desktop\LifeIsRpg\LifeIsRpg.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

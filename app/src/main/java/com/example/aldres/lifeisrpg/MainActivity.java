@@ -1,29 +1,25 @@
 package com.example.aldres.lifeisrpg;
 
-import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button signOutBtn;
-    private Button plusExp;
-    private Button minusExp;
-    String userId;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
-    DatabaseReference ref;
-    User userData;
+    private ActionBar toolbar;
+    ViewPager viewPager;
+    CustomFragmentAdapter fragmentAdapter;
+    TabLayout tabLayout;
 
 
     @Override
@@ -31,84 +27,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user == null) {
-            mAuth.signOut();
-            Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-            startActivity(intent);
+        if (!isSignedIn(mAuth)) {
+            startActivity(SignInActivity.newIntent(MainActivity.this));
         }
-        else {
-            userId = user.getUid();
-            ref = mDatabase.getReference().child("users").child(userId);
-            System.out.println(ref.getKey());
+        BottomNavigationView navigationView = findViewById(R.id.navigation);
+        navigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_profile:
+                    loadFragment(new ProfileFragment());
+                    return true;
+                case R.id.navigation_tasks:
+                    loadFragment(new TasksFragment());
+                    return true;
+                case R.id.navigation_messages:
+                    loadFragment(new ProfileFragment());
+                    return true;
+            }
+            return false;
         }
+    };
 
-
-
-        signOutBtn = findViewById(R.id.signOutBtn);
-        plusExp = findViewById(R.id.goToTasks);
-        minusExp = findViewById(R.id.minusExp);
-
-        signOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
-
-        plusExp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        minusExp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeExp(100);
-            }
-        });
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        mAuth = FirebaseAuth.getInstance();
-
-        if (!isSignedIn(mAuth)) {
-            Intent intent = new Intent(this, SignInActivity.class);
-            startActivity(intent);
-        }
     }
 
     private boolean isSignedIn(FirebaseAuth auth) {
         return auth.getCurrentUser() != null;
     }
 
-    private void signOut() {
-        mAuth.signOut();
-        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-        startActivity(intent);
-    }
-
-    private void changeExp(final int amount){
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User userData = dataSnapshot.getValue(User.class);
-                System.out.println(userData.getExp() + userData.getUsername() + userData.getGender());
-                userData.addExp(amount);
-                ref.setValue(userData);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 }

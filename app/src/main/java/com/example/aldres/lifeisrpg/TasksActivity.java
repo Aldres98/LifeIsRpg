@@ -57,8 +57,9 @@ public class TasksActivity extends AppCompatActivity {
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                     Task task = dsp.getValue(Task.class);
                     tasks.add(task);
-                    recyclerViewAdapter.notifyDataSetChanged();
                 }
+                recyclerViewAdapter.notifyDataSetChanged();
+
             }
 
             @Override
